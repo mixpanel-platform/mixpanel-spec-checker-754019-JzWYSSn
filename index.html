@@ -66,7 +66,7 @@
         flex: 0 1 auto;
         -webkit-align-self: flex-start;
         -ms-flex-item-align: start;
-        align-self: flex-start;
+        align-self: center;
         }
 
     .properties {
@@ -85,8 +85,12 @@
       margin: 5px 0 0 0;
     }
 
-    .input {
+    .input-events {
       display:flex;
+      height:20px;
+      width:500px;
+      text-align: center;
+      font-size:18px;
     }
 
     button {
@@ -97,28 +101,27 @@
 
   </head>
   <body class="mixpanel-platform-body spec">
+
      <div class="spec-items flex-container">
-        
+
         <div class="events">
-          <input class="input input-events" type="text" placeholder="Add an event."></input>
+          <input class="input-events" type="text" placeholder="Add an event."></input>
         </div>
 
         <div class="properties">
-          <input class="input input-properties" type="text" placeholder="Add a property."></input>
         </div>
-
-        <button id="add-property" class="center">+</button>
 
     </div>
   </div>
 
   <script type="text/javascript">
-  var i = 1;
+
     $("#add-property").click(function(){
-      console.log("Adding element.");
-      $(".properties").append("<input class='input input-properties' type='text' placeholder='"+i+"'></input>");
-      i++;
+      console.log("Adding property.");
+      $(".properties").append("<input class='input input-properties' type='text' placeholder='Add a property.'></input>");
     });
+
+
 
   </script>
   </body>
