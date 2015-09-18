@@ -57,7 +57,7 @@
         align-items: flex-start;
         }
 
-    .events {
+    .events, .input-events {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -102,27 +102,34 @@
   </head>
   <body class="mixpanel-platform-body spec">
 
-     <div class="spec-items flex-container">
+    <div class="spec-items flex-container">
 
-        <div class="events">
-          <input class="input-events" type="text" placeholder="Add an event."></input>
-        </div>
+    <input class="input-events" type="text" placeholder="Add an event. Press Enter."></input>
+        
+      <div class="events">
 
         <div class="properties">
         </div>
+
+      </div>
 
     </div>
   </div>
 
   <script type="text/javascript">
 
-    $("#add-property").click(function(){
-      console.log("Adding property.");
-      $(".properties").append("<input class='input input-properties' type='text' placeholder='Add a property.'></input>");
+    $('.input-events').keyup(function(e){
+        if(e.keyCode == 13)
+        {
+            $(this).trigger("enterKey");
+        }
     });
 
-
-
+    $(".input-events").bind("enterKey", function(){
+      var value = $(this).val();
+      $(".spec-items").append("<div class='events'>"+value+"<div class='properties'></div></div>");
+      $(this).val("");
+    });
   </script>
   </body>
 </html>
