@@ -5,18 +5,121 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+
 <!-- Booboo style sheet -->
     <style type="text/css">
 
-      .flex-container {
-         display: -webkit-flex;
-         display: flex;
-      }
+    div {
+      border: 1px solid black;
+      background-color: grey;
+    }
+
+    body {
+      max-width: 980px;
+    }
+
+    #add-property {
+      margin:5px 0 0 0;
+    }
+
+    .center {
+      -webkit-order: 0;
+      -ms-flex-order: 0;
+      order: 0;
+      -webkit-flex: 3 1 auto;
+      -ms-flex: 3 1 auto;
+      flex: 3 1 auto;
+      -webkit-align-self: center;
+      -ms-flex-item-align: center;
+      align-self: center;
+    }
+
+    .flex-container {
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+        justify-content: flex-start;
+        -webkit-align-content: stretch;
+        -ms-flex-line-pack: stretch;
+        align-content: stretch;
+        -webkit-align-items: flex-start;
+        -ms-flex-align: start;
+        align-items: flex-start;
+        }
+
+    .events {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 0 1 auto;
+        -ms-flex: 0 1 auto;
+        flex: 0 1 auto;
+        -webkit-align-self: flex-start;
+        -ms-flex-item-align: start;
+        align-self: flex-start;
+        }
+
+    .properties {
+        -webkit-order: 0;
+        -ms-flex-order: 0;
+        order: 0;
+        -webkit-flex: 3 1 auto;
+        -ms-flex: 3 1 auto;
+        flex: 3 1 auto;
+        -webkit-align-self: center;
+        -ms-flex-item-align: center;
+        align-self: center;
+        }
+
+    .input-events, .input-properties {
+      margin: 5px 0 0 0;
+    }
+
+    .input {
+      display:flex;
+    }
+
+    button {
+
+    }
 
     </style>
 
   </head>
-  <body class="mixpanel-platform-body flex-container">
-    
+  <body class="mixpanel-platform-body spec">
+     <div class="spec-items flex-container">
+        
+        <div class="events">
+          <input class="input input-events" type="text" placeholder="Add an event."></input>
+        </div>
+
+        <div class="properties">
+          <input class="input input-properties" type="text" placeholder="Add a property."></input>
+        </div>
+
+        <button id="add-property" class="center">+</button>
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+  var i = 1;
+    $("#add-property").click(function(){
+      console.log("Adding element.");
+      $(".properties").append("<input class='input input-properties' type='text' placeholder='"+i+"'></input>");
+      i++;
+    });
+
+  </script>
   </body>
 </html>
