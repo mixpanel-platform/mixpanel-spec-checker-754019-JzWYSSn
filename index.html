@@ -67,7 +67,13 @@
         -webkit-align-self: flex-start;
         -ms-flex-item-align: start;
         align-self: center;
+        font-size:18px;
+        height:20px;
         }
+
+    .events {
+      margin:5px 0 0 0;
+    }
 
     .properties {
         -webkit-order: 0;
@@ -141,7 +147,7 @@
   // });
 
   $("body").on("keyup",".edit-field", function(e){
-      if(e.keyCode == 13)
+      if(e.keyCode == 13 || e.keyCode == 27)
       {
           value = $(this).val();
           console.log(value);
