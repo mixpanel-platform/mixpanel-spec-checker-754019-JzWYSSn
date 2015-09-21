@@ -7,75 +7,21 @@
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
-
 <!-- Booboo style sheet -->
     <style type="text/css">
 
-    div {
-/*      border: 1px solid black;
-      background-color: grey;*/
-    }
+      div {
+      }
 
-    body {
-      max-width: 980px;
-    }
+      body {
+        max-width: 980px;
+      }
 
-    #add-property {
-      margin:5px 0 0 0;
-    }
+      #add-property {
+        margin:5px 0 0 0;
+      }
 
-    .center {
-      -webkit-order: 0;
-      -ms-flex-order: 0;
-      order: 0;
-      -webkit-flex: 3 1 auto;
-      -ms-flex: 3 1 auto;
-      flex: 3 1 auto;
-      -webkit-align-self: center;
-      -ms-flex-item-align: center;
-      align-self: center;
-    }
-
-    .flex-container {
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        -webkit-flex-wrap: nowrap;
-        -ms-flex-wrap: nowrap;
-        flex-wrap: nowrap;
-        -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-        justify-content: flex-start;
-        -webkit-align-content: stretch;
-        -ms-flex-line-pack: stretch;
-        align-content: stretch;
-        -webkit-align-items: flex-start;
-        -ms-flex-align: start;
-        align-items: flex-start;
-        }
-
-    .events, .input-events {
-        -webkit-order: 0;
-        -ms-flex-order: 0;
-        order: 0;
-        -webkit-flex: 0 1 auto;
-        -ms-flex: 0 1 auto;
-        flex: 0 1 auto;
-        -webkit-align-self: flex-start;
-        -ms-flex-item-align: start;
-        align-self: center;
-        font-size:18px;
-        height:20px;
-        }
-
-    .events {
-      margin:5px 0 0 0;
-    }
-
-    .properties {
+      .center {
         -webkit-order: 0;
         -ms-flex-order: 0;
         order: 0;
@@ -85,24 +31,85 @@
         -webkit-align-self: center;
         -ms-flex-item-align: center;
         align-self: center;
-        }
+      }
 
-    .input-events, .input-properties {
-      margin: 5px 0 0 0;
-    }
+      .flex-container {
+          display: -ms-flexbox;
+          display: -webkit-flex;
+          display: flex;
+          -webkit-flex-direction: column;
+          -ms-flex-direction: column;
+          flex-direction: column;
+          -webkit-flex-wrap: nowrap;
+          -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+          -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+          justify-content: flex-start;
+          -webkit-align-content: stretch;
+          -ms-flex-line-pack: stretch;
+          align-content: stretch;
+          -webkit-align-items: flex-start;
+          -ms-flex-align: start;
+          align-items: flex-start;
+          }
 
-    .input-events {
-      display:flex;
-      height:20px;
-      width:500px;
-      text-align: center;
-      font-size:18px;
-    }
+      .events, .input-events {
+          -webkit-order: 0;
+          -ms-flex-order: 0;
+          order: 0;
+          -webkit-flex: 0 1 auto;
+          -ms-flex: 0 1 auto;
+          flex: 0 1 auto;
+          -webkit-align-self: flex-start;
+          -ms-flex-item-align: start;
+          align-self: center;
+          font-size:18px;
+          height:20px;
+          }
 
-    button {
+      .events {
+        margin:5px 0 0 0;
+        order:0;
+      }
 
-    }
+      .expand-button {
+        position: relative;
+        clear: both;
+        top: 24px;
+        right: 25px;
+        cursor: pointer;
+        font-weight: 800;
+      }
 
+      .properties {
+          -webkit-order: 1;
+          -ms-flex-order: 1;
+          order: 1;
+          -webkit-flex: 3 1 auto;
+          -ms-flex: 3 1 auto;
+          flex: 3 1 auto;
+          -webkit-align-self: right;
+          -ms-flex-item-align: right;
+          align-self: right;
+
+          }
+
+      .input-events, .input-properties {
+        margin: 5px 0 0 0;
+      }
+
+      .input-events {
+        display:flex;
+        height:20px;
+        width:500px;
+        text-align: center;
+        font-size:18px;
+      }
+
+      button {
+
+      }
     </style>
 
   </head>
@@ -128,7 +135,7 @@
   // Add new event name if you press enter key on the main input field
     $(".input-events").bind("enterKey", function(){
       value = $(this).val();
-      $(".spec-items").append("<div class='events'><div class='event-name'>"+value+"</div><div class='properties'></div></div>");
+      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'></div></div>");
       $(this).val("");
     });
 
@@ -139,13 +146,7 @@
     // value = "";
   });
 
-  //// Switch editable div back to regular element on enter.
-  // $(".edit-field").bind("enterKey", function(e){
-  //   value = $(this).val();
-  //   console.log(value);
-  //   $(this).replaceWith("<div class='event-name'>"+value+"</div><div class='properties'></div>");
-  // });
-
+  // Switch editable div back to regular element on enter.
   $("body").on("keyup",".edit-field", function(e){
       if(e.keyCode == 13 || e.keyCode == 27)
       {
