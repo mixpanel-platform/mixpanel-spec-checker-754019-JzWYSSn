@@ -12,8 +12,8 @@
     <style type="text/css">
 
     div {
-      border: 1px solid black;
-      background-color: grey;
+/*      border: 1px solid black;
+      background-color: grey;*/
     }
 
     body {
@@ -105,31 +105,50 @@
     <div class="spec-items flex-container">
 
     <input class="input-events" type="text" placeholder="Add an event. Press Enter."></input>
-        
-      <div class="events">
-
-        <div class="properties">
-        </div>
-
-      </div>
 
     </div>
   </div>
 
   <script type="text/javascript">
 
-    $('.input-events').keyup(function(e){
+  // Listen for presses of the enter key 
+    $("body").on("keyup","input", function(e){
         if(e.keyCode == 13)
         {
             $(this).trigger("enterKey");
         }
     });
 
+  // Add new event name if you press enter key on the main input field
     $(".input-events").bind("enterKey", function(){
-      var value = $(this).val();
-      $(".spec-items").append("<div class='events'>"+value+"<div class='properties'></div></div>");
+      value = $(this).val();
+      $(".spec-items").append("<div class='events'><div class='event-name'>"+value+"</div><div class='properties'></div></div>");
       $(this).val("");
     });
+
+  // Make event name div "editable"
+  $("body").on("click",".event-name", function(){
+    value = $(this).text();
+    $(this).replaceWith("<input class='edit-field' value="+value+"></input>");
+    // value = "";
+  });
+
+  //// Switch editable div back to regular element on enter.
+  // $(".edit-field").bind("enterKey", function(e){
+  //   value = $(this).val();
+  //   console.log(value);
+  //   $(this).replaceWith("<div class='event-name'>"+value+"</div><div class='properties'></div>");
+  // });
+
+  $("body").on("keyup",".edit-field", function(e){
+      if(e.keyCode == 13)
+      {
+          value = $(this).val();
+          console.log(value);
+          $(this).replaceWith("<div class='event-name'>"+value+"</div>");  
+      }
+  });
+
   </script>
   </body>
 </html>
