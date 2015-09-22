@@ -71,15 +71,23 @@
       .events {
         margin:5px 0 0 0;
         order:0;
+        font-size:18px;
+        height:20px;
+      }
+
+      .edit-field {
+        font-size:18px;
+        height:18px;
+        text-align:center;
       }
 
       .expand-button {
-        position: relative;
+/*        position: relative;
         clear: both;
         top: 24px;
         right: 25px;
         cursor: pointer;
-        font-weight: 800;
+        font-weight: 800;*/
       }
 
       .properties {
@@ -107,6 +115,8 @@
         font-size:18px;
       }
 
+      .event
+
     </style>
 
   </head>
@@ -132,7 +142,7 @@
   // Add new event name if you press enter key on the main input field
     $(".input-events").bind("enterKey", function(){
       value = $(this).val();
-      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Enter a property. Press enter.'></input></div></div>");
+      $(".spec-items").append("<div class='events'><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Enter a property. Press enter.'></input></div></div>");
       $(this).val("");
     });
 
