@@ -63,13 +63,20 @@
           flex: 0 1 auto;
           -webkit-align-self: flex-start;
           -ms-flex-item-align: start;
-          align-self: center;
+          /*align-self: left;*/
           font-size:18px;
           height:20px;
           }
+      
+      .save-button {
+        font-size:14px;
+        height:24px;
+        -webkit-align-self: flex-start;
+        -ms-flex-item-align: start;
+      }
 
       .events {
-        margin:5px 0 0 0;
+        margin:5px 0 0 5px;
         order:0;
         font-size:18px;
         height:20px;
@@ -110,12 +117,11 @@
       .input-events {
         display:flex;
         height:20px;
-        width:500px;
+        width:250px;
         text-align: center;
         font-size:18px;
+        margin:0 0 10px 0;
       }
-
-      .event
 
     </style>
 
@@ -125,6 +131,7 @@
     <div class="spec-items flex-container">
 
     <input class="input-events" type="text" placeholder="Add an event. Press enter."></input>
+    <button class="save-button">Save</button>
 
     </div>
   </div>
@@ -153,12 +160,17 @@
     // value = "";
   });
 
-  // Switch editable div back to regular element on enter.
+  // Switch editable div back to regular element on enter. Delete if blank.
   $("body").on("keyup",".edit-field", function(e){
       if(e.keyCode == 13 || e.keyCode == 27)
       {
           value = $(this).val();
-          $(this).replaceWith("<div class='event-name'>"+value+"</div>");  
+          if (value == "" || value == " ") {
+            $(this).parent(".events").remove();
+            console.log("Removed element.");
+          } else {
+            $(this).replaceWith("<div class='event-name'>"+value+"</div>");    
+          }
       }
   });
 
