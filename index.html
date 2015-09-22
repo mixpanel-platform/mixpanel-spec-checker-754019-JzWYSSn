@@ -92,7 +92,7 @@
           -webkit-align-self: right;
           -ms-flex-item-align: right;
           align-self: right;
-
+          display: none;
           }
 
       .input-events, .input-properties {
@@ -107,9 +107,6 @@
         font-size:18px;
       }
 
-      button {
-
-      }
     </style>
 
   </head>
@@ -117,7 +114,7 @@
 
     <div class="spec-items flex-container">
 
-    <input class="input-events" type="text" placeholder="Add an event. Press Enter."></input>
+    <input class="input-events" type="text" placeholder="Add an event. Press enter."></input>
 
     </div>
   </div>
@@ -135,7 +132,7 @@
   // Add new event name if you press enter key on the main input field
     $(".input-events").bind("enterKey", function(){
       value = $(this).val();
-      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'></div></div>");
+      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Enter a property. Press enter.'></input></div></div>");
       $(this).val("");
     });
 
@@ -151,9 +148,14 @@
       if(e.keyCode == 13 || e.keyCode == 27)
       {
           value = $(this).val();
-          console.log(value);
           $(this).replaceWith("<div class='event-name'>"+value+"</div>");  
       }
+  });
+
+  // Expand + icon on click
+  $("body").on("click",".expand-button", function(){
+    $(this).siblings(".properties").toggle();
+    // value = "";
   });
 
   </script>
