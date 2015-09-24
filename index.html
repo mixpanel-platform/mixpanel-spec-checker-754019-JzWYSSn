@@ -97,7 +97,7 @@
         margin:5px 0 0 5px;
         order:0;
         font-size:18px;
-        height:20px;
+        height:auto;
       }
 
       .edit-field {
@@ -172,11 +172,20 @@
     });
 
   // Add new event name if you press enter key on the main input field
-    $(".input-events").bind("enterKey", function(){
+  $(".input-events").bind("enterKey", function(){
+    value = $(this).val();
+    $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
+    $(this).val("");
+  });
+
+  // Add new property name if you press enter key on input
+  $("body").on("keyup",".input-properties", function(e){
+    if (e.keyCode == 13) {
       value = $(this).val();
-      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
+      $(this).parent(".properties").append("<div class='event-name'>"+value+"</div>");
       $(this).val("");
-    });
+    }
+  });
 
   // Make event name div "editable"
   $("body").on("click",".event-name", function(){
