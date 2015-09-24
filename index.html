@@ -100,22 +100,23 @@
         height:20px;
       }
 
-      .edit-field {
+      .edit-field,  {
         font-size:18px;
         height:18px;
         text-align:center;
       }
 
       .expand-button {
+        width:10px;
         margin: 0 10px 0 0;
         cursor: pointer;
         font-weight: 800;
       }
 
       .properties {
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
         -webkit-flex-wrap: nowrap;
         -ms-flex-wrap: nowrap;
         flex-wrap: nowrap;
@@ -129,10 +130,13 @@
         -ms-flex-align: start;
         align-items: flex-start;
         display: none;
+        margin: 0 0 0 10px;
           }
 
-      .input-events, .input-properties {
+      .input-properties {
         margin: 5px 0 0 0;
+        width:180px;
+        text-align: center;
       }
 
       .input-events {
@@ -170,7 +174,7 @@
   // Add new event name if you press enter key on the main input field
     $(".input-events").bind("enterKey", function(){
       value = $(this).val();
-      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Enter a property. Press enter.'></input></div></div>");
+      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
       $(this).val("");
     });
 
