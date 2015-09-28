@@ -49,7 +49,7 @@
           -webkit-align-items: flex-start;
           -ms-flex-align: start;
           align-items: flex-start;
-          }
+        }
 
       .events, .input-events {
           -webkit-order: 0;
@@ -63,7 +63,7 @@
           /*align-self: left;*/
           font-size:18px;
           height:20px;
-          }
+        }
       
       .save-button {
         font-size:14px;
@@ -129,7 +129,7 @@
         align-items: flex-start;
         display: none;
         margin: 0 0 0 10px;
-          }
+      }
 
       .input-properties {
         margin: 5px 0 0 0;
@@ -156,12 +156,13 @@
     </style>
 
   </head>
+
   <body class="mixpanel-platform-body spec">
 
     <div class="spec-items flex-container">
 
-    <input class="input-events" type="text" placeholder="Add an event. Press enter."></input>
-    <button class="save-button">Save</button>
+      <input class="input-events" type="text" placeholder="Add an event. Press enter."></input>
+      <button class="save-button">Save</button>
 
     </div>
   </div>
@@ -169,12 +170,17 @@
   <script type="text/javascript">
 
   // Listen for presses of the enter key 
-    $("body").on("keyup","input", function(e){
-        if(e.keyCode == 13)
-        {
-            $(this).trigger("enterKey");
-        }
-    });
+  $("body").on("keyup","input", function(e){
+      if(e.keyCode == 13)
+      {
+          $(this).trigger("enterKey");
+      }
+  });
+
+  // Count properties and update the counter.
+  function count_properties (event) {
+    $(event).siblings(".properties").children(".property-name").length;
+  }
 
   // Add new event name if you press enter key on the main input field
   $(".input-events").bind("enterKey", function(){
@@ -220,9 +226,10 @@
       }
   });
 
-  // Expand + icon on click and turn to - sign when expanded.
+  // Expand + icon on click and turn to - sign when expanded. Also check number of properties nested under event.
   $("body").on("click",".expand-button", function(){
     text = $(this).text();
+
     if (text == "+") {
       $(this).text("-");
     }else{
