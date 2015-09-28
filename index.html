@@ -153,6 +153,10 @@
         margin:0 0 10px 0;
       }
 
+      .event-name {
+        width: 160px;
+      }
+
     </style>
 
   </head>
@@ -179,7 +183,8 @@
 
   // Count properties and update the counter.
   function count_properties (event) {
-    $(event).siblings(".properties").children(".property-name").length;
+    n = $(event).siblings(".properties").children(".property-name").length;
+    $(event).siblings(".property-info").text(n+" properties.");
   }
 
   // Add new event name if you press enter key on the main input field
