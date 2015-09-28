@@ -10,9 +10,6 @@
 <!-- Booboo style sheet -->
     <style type="text/css">
 
-      div {
-      }
-
       body {
         max-width: 980px;
       }
@@ -101,6 +98,7 @@
       }
 
       .edit-field {
+        display:flex;
         font-size:18px;
         height:18px;
         text-align:center;
@@ -139,6 +137,13 @@
         text-align: center;
       }
 
+      .property-info {
+        margin: 0 0 0 10px;
+        font-style: oblique;
+        font-weight:100;
+        display:none;
+      }
+
       .input-events {
         display:flex;
         height:20px;
@@ -174,7 +179,7 @@
   // Add new event name if you press enter key on the main input field
   $(".input-events").bind("enterKey", function(){
     value = $(this).val();
-    $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
+    $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+value+"</div><span class='property-info'># properties</span><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
     $(this).val("");
   });
 
@@ -182,13 +187,20 @@
   $("body").on("keyup",".input-properties", function(e){
     if (e.keyCode == 13) {
       value = $(this).val();
-      $(this).parent(".properties").append("<div class='event-name'>"+value+"</div>");
+      $(this).parent(".properties").append("<div class='property-name'>"+value+"</div>");
       $(this).val("");
     }
   });
 
   // Make event name div "editable"
   $("body").on("click",".event-name", function(){
+    value = $(this).text();
+    $(this).replaceWith("<input class='edit-field' value="+value+"></input>");
+    // value = "";
+  });
+
+  // Make property name div "editable"
+  $("body").on("click",".property-name", function(){
     value = $(this).text();
     $(this).replaceWith("<input class='edit-field' value="+value+"></input>");
     // value = "";
@@ -217,7 +229,6 @@
       $(this).text("+");
     };
     $(this).siblings(".properties").toggle();
-    // value = "";
   });
 
   </script>
