@@ -156,7 +156,6 @@
       .event-name {
         width: 160px;
       }
-
     </style>
 
   </head>
@@ -181,11 +180,15 @@
       }
   });
 
-  // Count properties and update the counter.
-  function count_properties (event) {
-    n = $(event).siblings(".properties").children(".property-name").length;
-    $(event).siblings(".property-info").text(n+" properties.");
-  }
+  // // Count properties and update the counter.
+  // function count_properties (event) {
+  //   n = $(event).siblings(".properties").children(".property-name").length;
+  //   if (n > 0) {
+  //     $(event).siblings(".property-info").text(n+" properties.");
+  //     $(event).siblings(".property-info").toggle();
+  //   }
+  //   console.log(n);
+  // }
 
   // Add new event name if you press enter key on the main input field
   $(".input-events").bind("enterKey", function(){
@@ -239,6 +242,7 @@
       $(this).text("-");
     }else{
       $(this).text("+");
+      // count_properties($(this));
     };
     $(this).siblings(".properties").toggle();
   });
