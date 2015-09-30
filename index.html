@@ -247,6 +247,33 @@
     $(this).siblings(".properties").toggle();
   });
 
+  // Build list of JSON from spec items, stringify, then save to localStorage.
+  // {"event":"event_name", 
+  //          "$properties":
+  //                        ["1","2","3"]
+  // }
+  $(".save-button").on("click",function(){
+    list = [];
+    json = {};
+    props = [];
+    events = [];
+
+    $(".events").each(function(){
+      event = $(this).children(".event-name").text();
+      json["event"] = event;
+
+      $(this).children(".properties").each(function(){
+        prop = $(this).text();
+        props.push(prop);
+      });
+      console.log(props);
+      json["$properties"] = props;
+
+      console.log(json);
+    });
+    // console.log(list);
+  });
+
   </script>
   </body>
 </html>
