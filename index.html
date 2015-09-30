@@ -172,6 +172,13 @@
 
   <script type="text/javascript">
 
+  // On document ready, check for spec in localStorage. Parse if it's there.
+  $(document).ready(function(){
+    if (localStorage.getItem("spec")) {
+      list = JSON.parse(localStorage.getItem("spec"));
+    }
+  });    
+
   // Listen for presses of the enter key 
   $("body").on("keyup","input", function(e){
       if(e.keyCode == 13)
@@ -272,16 +279,14 @@
     // console.log(list);
 
     // Stringify and save to localStorage.
-    if(typeof(Storage) !== "undefined") {
+    if (typeof(Storage) !== "undefined") {
         localStorage.setItem("spec",JSON.stringify(list));
         console.log(JSON.stringify(list));
         alert("Saved!");
     } else {
-        alert("Sorry! Your browser does not support local storage.");
+      alert("Sorry! Your browser does not support local storage.");
     }
   });
-
-  // Retrieve saved JSON string and populate spec. 'localStorage.getItem(...)'
 
   </script>
   </body>
