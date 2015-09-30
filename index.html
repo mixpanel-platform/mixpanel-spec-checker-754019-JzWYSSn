@@ -240,38 +240,35 @@
 
     if (text == "+") {
       $(this).text("-");
-    }else{
+    } else {
       $(this).text("+");
-      // count_properties($(this));
     };
+
     $(this).siblings(".properties").toggle();
   });
 
   // Build list of JSON from spec items, stringify, then save to localStorage.
-  // {"event":"event_name", 
-  //          "$properties":
-  //                        ["1","2","3"]
-  // }
   $(".save-button").on("click",function(){
     list = [];
-    json = {};
-    props = [];
-    events = [];
 
     $(".events").each(function(){
+      props = [];
+      json = {};
+
       event = $(this).children(".event-name").text();
       json["event"] = event;
 
       $(this).children(".properties").each(function(){
-        prop = $(this).text();
-        props.push(prop);
+        json["$properties"] = [];
+        $(this).children(".property-name").each(function(){
+          prop = $(this).text();  
+          props.push(prop);
+          json["$properties"] = props;
+        });
       });
-      console.log(props);
-      json["$properties"] = props;
-
-      console.log(json);
+      list.push(json);
     });
-    // console.log(list);
+    console.log(list);
   });
 
   </script>
