@@ -251,6 +251,7 @@
   $(".save-button").on("click",function(){
     list = [];
 
+    // Build list of JSON objects.
     $(".events").each(function(){
       props = [];
       json = {};
@@ -268,8 +269,19 @@
       });
       list.push(json);
     });
-    console.log(list);
+    // console.log(list);
+
+    // Stringify and save to localStorage.
+    if(typeof(Storage) !== "undefined") {
+        localStorage.setItem("spec",JSON.stringify(list));
+        console.log(JSON.stringify(list));
+        alert("Saved!");
+    } else {
+        alert("Sorry! Your browser does not support local storage.");
+    }
   });
+
+  // Retrieve saved JSON string and populate spec. 'localStorage.getItem(...)'
 
   </script>
   </body>
