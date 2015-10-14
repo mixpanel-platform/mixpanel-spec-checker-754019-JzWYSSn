@@ -175,8 +175,21 @@
   // On document ready, check for spec in localStorage. Parse if it's there.
   $(document).ready(function(){
     if (localStorage.getItem("spec")) {
-      list = JSON.parse(localStorage.getItem("spec"));
-    }
+      console.log("Found a spec!");
+      saved_list = JSON.parse(localStorage.getItem("spec"));
+      // console.log(saved_list);
+
+      for (i = 0; i < saved_list.length; i++) {
+        event = saved_list[i].event;
+        $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+event+"</div><span class='property-info'># properties</span><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
+        
+        for (j=0; j < saved_list[i].$properties.length; j++) {
+          property = saved_list[i].$properties[j];
+          $(".properties").last().append("<div class='property-name'>"+property+"</div>");
+        };
+
+      };
+    };
   });    
 
   // Listen for presses of the enter key 
@@ -186,16 +199,6 @@
           $(this).trigger("enterKey");
       }
   });
-
-  // // Count properties and update the counter.
-  // function count_properties (event) {
-  //   n = $(event).siblings(".properties").children(".property-name").length;
-  //   if (n > 0) {
-  //     $(event).siblings(".property-info").text(n+" properties.");
-  //     $(event).siblings(".property-info").toggle();
-  //   }
-  //   console.log(n);
-  // }
 
   // Add new event name if you press enter key on the main input field
   $(".input-events").bind("enterKey", function(){
@@ -283,9 +286,9 @@
         localStorage.setItem("spec",JSON.stringify(list));
         console.log(JSON.stringify(list));
         alert("Saved!");
-    } else {
+      } else {
       alert("Sorry! Your browser does not support local storage.");
-    }
+    };
   });
 
   </script>
