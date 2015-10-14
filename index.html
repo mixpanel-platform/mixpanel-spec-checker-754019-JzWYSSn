@@ -72,6 +72,12 @@
         -ms-flex-item-align: start;
       }
 
+      .saved-date {
+        font-style: oblique;
+        color:grey;
+        margin:10px 0 0 0;
+      }
+
       .events {
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -177,6 +183,11 @@
     if (localStorage.getItem("spec")) {
       console.log("Found a spec!");
       saved_list = JSON.parse(localStorage.getItem("spec"));
+      saved_date = localStorage.getItem("saved_date");
+      
+      if (saved_date != null) {
+        $(".spec-items").append("<span class='saved-date'> Last saved on: "+saved_date+"</span>");
+      }
       // console.log(saved_list);
 
       for (i = 0; i < saved_list.length; i++) {
@@ -187,7 +198,6 @@
           property = saved_list[i].$properties[j];
           $(".properties").last().append("<div class='property-name'>"+property+"</div>");
         };
-
       };
     };
   });    
@@ -283,7 +293,8 @@
 
     // Stringify and save to localStorage.
     if (typeof(Storage) !== "undefined") {
-        localStorage.setItem("spec",JSON.stringify(list));
+        localStorage.setItem("spec", JSON.stringify(list));
+        localStorage.setItem("saved_date", new Date());
         console.log(JSON.stringify(list));
         alert("Saved!");
       } else {
