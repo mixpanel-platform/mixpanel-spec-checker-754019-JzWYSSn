@@ -194,23 +194,27 @@
       console.log("Found a spec!");
       saved_list = JSON.parse(localStorage.getItem("spec"));
       saved_date = localStorage.getItem("saved_date");
+      specWrite(saved_list);
       
       if (saved_date != null) {
         $(".spec-items").append("<span class='saved-date'> Last saved on: "+saved_date+"</span>");
       }
       // console.log(saved_list);
-
-      for (i = 0; i < saved_list.length; i++) {
-        event = saved_list[i].event;
-        $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+event+"</div><span class='property-info'># properties</span><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
-        
-        for (j=0; j < saved_list[i].$properties.length; j++) {
-          property = saved_list[i].$properties[j];
-          $(".properties").last().append("<div class='property-name'>"+property+"</div>");
-        };
-      };
     };
   });    
+
+  // Write spec
+  function specWrite(saved_list) {
+    for (i = 0; i < saved_list.length; i++) {
+      event = saved_list[i].event;
+      $(".spec-items").append("<div class='events'><span class='expand-button'>+</span><div class='event-name'>"+event+"</div><span class='property-info'># properties</span><div class='properties'><input class='input-properties' placeholder='Add a property. Press enter.'></input></div></div>");
+      
+      for (j=0; j < saved_list[i].$properties.length; j++) {
+        property = saved_list[i].$properties[j];
+        $(".properties").last().append("<div class='property-name'>"+property+"</div>");
+      };
+    };
+  }
 
   // Listen for presses of the enter key 
   $("body").on("keyup","input", function(e){
@@ -354,8 +358,8 @@
         var csvData = event.target.result;
         data = $.csv.toArrays(csvData);
         header = data[3];
-        console.log(header)
-        console.log(data)
+        // console.log(header)
+        // console.log(data)
         eventColumn = header.indexOf('Event');
         propColumn = header.indexOf('Property');
         superPropColumn = header.indexOf('Super Property');
@@ -381,11 +385,12 @@
             if (superProperty) {
               superProps.push(superProperty);
             }
-            console.log(arr)
+            // console.log(arr)
           });
           _.each(events, function(event){
             event.$properties = new Set(event.$properties.concat(superProps))
           });
+          console.log(events)
           specWrite(events)
         } else {
           /* alert('No data to import!'); */
