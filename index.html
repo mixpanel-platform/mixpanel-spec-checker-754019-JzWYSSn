@@ -241,6 +241,8 @@
     if (window.confirm("Are you sure you want to clear your spec?")) {
       $(".events").remove();
       $(".saved-date").remove();
+      localStorage.removeItem("spec");
+      localStorage.removeItem("saved_date");
     }
   })
 
