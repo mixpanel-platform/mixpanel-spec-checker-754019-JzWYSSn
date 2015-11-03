@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/css/reset.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.css"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
     <script src="https://cdn.mxpnl.com/libs/mixpanel-platform/build/mixpanel-platform.v0.latest.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
@@ -330,92 +330,6 @@
       alert("Sorry! Your browser does not support local storage.");
     };
   });
-
-  /* Upload and Store data client-side */
-  
-  document.getElementById("uploadBtn").onchange = function () {
-    document.getElementById("uploadFile").value = this.value.split("\\")[this.value.split("\\").length - 1];
-  };
-  
-  
-  // The event listener for the file upload
-  document.getElementById('uploadBtn').addEventListener('change', upload, false);
-
-  // Method that checks that the browser supports the HTML5 File API
-  function browserSupportFileUpload() {
-      var isCompatible = false;
-      if (window.File && window.FileReader && window.FileList && window.Blob) {
-      isCompatible = true;
-      }
-      return isCompatible;
-  }
-  
-  // Method that reads and processes the selected file
-  function upload(evt) {
-  if (!browserSupportFileUpload()) {
-    alert('The File APIs are not fully supported in this browser!');
-    } else {
-      var eventColumn;
-      var propColumn;
-      var superPropColumn;
-      var header;
-      var csvArray;
-      var chartData = {};
-      var events = [];
-      var superProps = [];
-      var data = null;
-      var file = evt.target.files[0];
-      var reader = new FileReader();
-      var eventIndex = -1;
-      reader.readAsText(file);
-      
-      reader.onload = function(event) {
-        var csvData = event.target.result;
-        data = $.csv.toArrays(csvData);
-        header = data[3];
-        // console.log(header)
-        // console.log(data)
-        eventColumn = header.indexOf('Event');
-        propColumn = header.indexOf('Property');
-        superPropColumn = header.indexOf('Super Property');
-
-    
-        if (data && data.length > 0) {
-          /* Create a dictionary with the transaction date and transaction amount */
-          csvArray = data.slice(4, data.length);
-          _.each(csvArray, function(arr){
-            var property = arr[propColumn];
-            var event = arr[eventColumn];
-            var superProperty = arr[superPropColumn];
-
-            if (event){
-              eventIndex++;
-              events.push({ event: event, $properties: [] });
-            }
-            
-            if (property) {
-              events[eventIndex]['$properties'].push(property);
-            }
-            
-            if (superProperty) {
-              superProps.push(superProperty);
-            }
-            // console.log(arr)
-          });
-          _.each(events, function(event){
-            event.$properties = new Set(event.$properties.concat(superProps))
-          });
-          console.log(events)
-          specWrite(events)
-        } else {
-          /* alert('No data to import!'); */
-        }
-      };
-      reader.onerror = function() {
-          alert('Unable to read ' + file.fileName);
-      };
-    }
-  }
 
   </script>
   </body>
