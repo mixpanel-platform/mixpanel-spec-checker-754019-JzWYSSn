@@ -66,7 +66,7 @@
           height:20px;
         }
       
-      .save-button {
+      .save-button, .clear-button {
         font-size:14px;
         height:24px;
         -webkit-align-self: flex-start;
@@ -172,7 +172,11 @@
     <div class="spec-items flex-container">
 
       <input class="input-events" type="text" placeholder="Add an event. Press enter."></input>
-      <button class="save-button">Save</button>
+      
+      <div class="flex-container-x">        
+        <button class="save-button">Save</button>
+        <button class="clear-button">Clear</button>
+      </div>
       
       <!-- Upload button from Emmett's code -->
       <div class='csvUpload'>
